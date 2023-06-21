@@ -14,35 +14,23 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
     var RoDashboard = AbstractAction.extend({
         template: "RoDashboard",
         events: {
-            "click .pos_order_today": "pos_order_today",
-            "click .pos_order": "pos_order",
-            "click .pos_total_sales": "pos_order",
-            "click .pos_session": "pos_session",
-            "click .pos_refund_orders": "pos_refund_orders",
-            "click .pos_refund_today_orders": "pos_refund_today_orders",
+            //"click .pos_order_today": "pos_order_today",
+            //"click .pos_order": "pos_order",
+            //"click .pos_total_sales": "pos_order",
+            //"click .pos_session": "pos_session",
+            //"click .pos_refund_orders": "pos_refund_orders",
+            // "click .pos_refund_today_orders": "pos_refund_today_orders",
             "click .o_change_period": "change_dashboard",
             "change #ros_sales": "onclick_ros_sales",
-            "change #ros_sales_compta": "onclick_ros_sales_compta",
+            //"change #ros_sales_compta": "onclick_ros_sales_compta",
         },
 
         init: function (parent, context) {
             this._super(parent, context);
-            this.dashboards_templates = ["RoTotal", "RoChart", "RoDetails"];
-            this.total_entree = [];
-            this.entree_mecha = [];
-            this.entree_carrosserie = [];
-            this.entree_painting = [];
-            this.total_cac = [];
-            this.ca_ht = [];
-            this.ca_ttc = [];
-            this.ca_cp = [];
-            this.ca_cnp = [];
-            this.ca_nc = [];
-            this.cac_mecha = [];
-            this.cac_carrosserie = [];
-            this.cac_painting = [];
-            this.cac_autre = [];
-            this.entree_autre = [];
+            this.dashboards_templates = ['PosCustomer'];
+            this.payment_details = [];
+            this.top_salesperson = [];
+            this.selling_product = [];
             this.default_start_date = "";
             this.default_end_date = "";
             this.customer_data = [];
@@ -142,22 +130,9 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
             def1.then(function (result) {
                 // Les variables retournées dans le fichier ro_dashboard.py sont utilisables dans le fichier ro_dashboard.xml
                 // affichées dans la section 2
-                self.total_entree = result["total_entree"];
-                self.entree_mecha = result["entree_mecha"];
-                self.entree_carrosserie = result["entree_carrosserie"];
-                self.entree_painting = result["entree_painting"];
-                self.ca_ht = result["ca_ht"];
-                self.ca_ttc = result["ca_ttc"];
-                self.ca_cnp = result["ca_cnp"];
-                self.ca_nc = result["ca_nc"];
-                self.ca_cp = result["ca_cp"];
-                self.total_cac = result["total_cac"];
-                self.cac_mecha = result["cac_mecha"];
-                self.cac_carrosserie = result["cac_carrosserie"];
-                self.cac_painting = result["cac_painting"];
-                self.company_name = result["company_name"];
-                self.cac_autre = result["cac_autre"];
-                self.entree_autre = result["entree_autre"];
+                self.payment_details = res['customer_data'];
+                self.top_salesperson = res['cash_data'];
+                self.selling_product = res['vendor_data'];
                 // les différentes dates de la périodes affichées dans la section 1
                 if (la_data["start_date"] !== "") {
                     self.default_start_date = la_data["start_date"];

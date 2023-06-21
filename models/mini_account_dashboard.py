@@ -39,20 +39,32 @@ class MiniAccountDashboard(models.Model):
         return res
 
     @api.model
-    def get_information(self, state):
+    def get_information(self, state, search_data):
         companies = self.env['res.company'].sudo().search([])
         company = None
+        data = dict()
+        if search_data['is_search']:
+            data = {
+                'start_date': data['start_date'],
+                'end_date': data['end_date']
+            }
+        else:
+            data = {
+                'start_date': self.start_date,
+                'end_date': self.end_date
+            }
         if state:
             company = tuple(companies.ids)
         else:
             company = tuple(companies.filtered(lambda c: c.entrepot_centrale).ids)
         # info tresorerie
-        query = '''select account_move.journal_id as journal_id,account_journal.backend_name as name,
+        query = '''select account_move.journal_id as journal_id,account_journal.backend_name as name, 
         sum(account_bank_statement_line.amount) as amount from account_move inner join account_bank_statement_line on 
         account_bank_statement_line.id = account_move.statement_line_id inner join account_journal on 
-        account_journal.id = account_move.journal_id where account_move.company_id in %(company)s GROUP BY 
-        account_move.journal_id,account_journal.backend_name ORDER BY amount DESC; '''
-        self._cr.execute(query, {'company': company})
+        account_journal.id = account_move.journal_id where account_move.company_id in %(company)s and 
+        account_move.date >= %(start_date)s and account_move.date <= %(end_date)s GROUP BY account_move.journal_id,
+        account_journal.backend_name ORDER BY amount DESC; '''
+        self._cr.execute(query, {'company': company, 'start_date': data['start_date'], 'end_date': data['end_date']})
         cash_data = self._cr.dictfetchall()
         self._cr.flush()
         # client data

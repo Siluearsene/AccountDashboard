@@ -14,12 +14,12 @@ var QWeb = core.qweb;
 var PosDashboard = AbstractAction.extend({
     template: 'PosDashboard',
     events: {
-            'click .pos_order_today':'pos_order_today',
-            'click .pos_order':'pos_order',
-            'click .pos_total_sales':'pos_order',
-            'click .pos_session':'pos_session',
-            'click .pos_refund_orders':'pos_refund_orders',
-            'click .pos_refund_today_orders':'pos_refund_today_orders',
+            //'click .pos_order_today':'pos_order_today',
+            //'click .pos_order':'pos_order',
+            //'click .pos_total_sales':'pos_order',
+            //'click .pos_session':'pos_session',
+            //'click .pos_refund_orders':'pos_refund_orders',
+            //'click .pos_refund_today_orders':'pos_refund_today_orders',
             'change #pos_sales': 'onclick_pos_sales',
     },
 

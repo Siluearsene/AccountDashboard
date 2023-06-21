@@ -72,7 +72,7 @@
 
         <record id="ir_actions_server_mini_account_dashboard_view" model="ir.actions.server">
             <field name="name">Dashboard</field>
-            <field name="model_id" ref="dashboard_account.model_mini_account_dashboard" />
+            <field name="model_id" ref="model_mini_account_dashboard" />
             <field name="state">code</field>
             <field name="binding_view_types">form</field>
             <field name="code">

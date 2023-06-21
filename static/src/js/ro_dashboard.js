@@ -129,7 +129,7 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
                     args: [state],
                 });
             }
-            def1.then(function (result) {
+            def1.then(function (res) {
                 // Les variables retournées dans le fichier ro_dashboard.py sont utilisables dans le fichier ro_dashboard.xml
                 // affichées dans la section 2
                 self.payment_details = res['customer_data'];

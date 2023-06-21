@@ -12,7 +12,7 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
     var QWeb = core.qweb;
 
     var RoDashboard = AbstractAction.extend({
-        template: "RoDashboard",
+        template: "AccountDashboard",
         events: {
             //"click .pos_order_today": "pos_order_today",
             //"click .pos_order": "pos_order",

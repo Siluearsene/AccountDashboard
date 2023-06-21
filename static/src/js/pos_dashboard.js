@@ -20,7 +20,7 @@ var PosDashboard = AbstractAction.extend({
             //'click .pos_session':'pos_session',
             //'click .pos_refund_orders':'pos_refund_orders',
             //'click .pos_refund_today_orders':'pos_refund_today_orders',
-            'change #pos_sales': 'onclick_pos_sales',
+            //'change #pos_sales': 'onclick_pos_sales',
     },
 
     init: function(parent, context) {

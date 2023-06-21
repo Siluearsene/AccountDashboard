@@ -44,10 +44,11 @@ class MiniAccountDashboard(models.Model):
         companies = self.env['res.company'].sudo().search([])
         company = None
         data = dict()
+        print('search data ...............', search_data)
         if search_data['is_search']:
             data = {
-                'start_date': data['start_date'],
-                'end_date': data['end_date']
+                'start_date': search_data['start_date'],
+                'end_date': search_data['end_date']
             }
         else:
             data = {
@@ -69,25 +70,23 @@ class MiniAccountDashboard(models.Model):
         cash_data = self._cr.dictfetchall()
         self._cr.flush()
         # client data
-        customer_data = self.get_customer_data()
-        vendor_data = self.get_vendor_data()
+        customer_data = self.get_customer_data(data)
+        vendor_data = self.get_vendor_data(data)
         # stock_value = self.get_stock_amount_qty()
         return dict(cash_data=cash_data, customer_data=customer_data, vendor_data=vendor_data)
 
-    def get_customer_data(self):
+    def get_customer_data(self, data):
         now_date = datetime.now()
-        first_month = datetime(now_date.year, 1, 1).strftime("%Y-%m-%d")
-        last_month = datetime(now_date.year, 12, 1).strftime("%Y-%m-%d")
         account_move = self.env['account.move'].search([
-            ('invoice_date', '>=', first_month),
-            ('invoice_date', '<=', last_month),
+            ('invoice_date', '>=', data['start_date']),
+            ('invoice_date', '<=', data['end_date']),
             ('move_type', '=', 'out_invoice'),
             ('state', '=', 'posted'),
         ])
 
         account_payment = self.env['account.payment'].search([
-            ('date', '>=', first_month),
-            ('date', '<=', last_month),
+            ('date', '>=', data['start_date']),
+            ('date', '<=', data['end_date']),
             ('payment_type', '=', 'inbound'),
             ('partner_type', '=', 'customer'),
             ('state', '=', 'posted'),
@@ -101,23 +100,21 @@ class MiniAccountDashboard(models.Model):
         if account_payment:
             credit = sum(account_payment.mapped('amount'))
         customer_data = [
-            {'start_date': first_month, 'end_date': last_month, 'amount': debit - credit, 'journal_id': journal_id}]
+            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': debit - credit, 'journal_id': journal_id}]
         return customer_data
 
-    def get_vendor_data(self):
+    def get_vendor_data(self, data):
         now_date = datetime.now()
-        first_month = datetime(now_date.year, 1, 1).strftime("%Y-%m-%d")
-        last_month = datetime(now_date.year, 12, 1).strftime("%Y-%m-%d")
         account_move = self.env['account.move'].search([
-            ('invoice_date', '>=', first_month),
-            ('invoice_date', '<=', last_month),
+            ('invoice_date', '>=', data['start_date']),
+            ('invoice_date', '<=', data['end_date']),
             ('move_type', '=', 'in_invoice'),
             ('state', '=', 'posted'),
         ])
 
         account_payment = self.env['account.payment'].search([
-            ('date', '>=', first_month),
-            ('date', '<=', last_month),
+            ('date', '>=', data['start_date']),
+            ('date', '<=', data['end_date']),
             ('payment_type', '=', 'outbound'),
             ('partner_type', '=', 'supplier'),
             ('state', '=', 'posted'),
@@ -131,7 +128,7 @@ class MiniAccountDashboard(models.Model):
         if account_payment:
             credit = sum(account_payment.mapped('amount'))
         vendor_data = [
-            {'start_date': first_month, 'end_date': last_month, 'amount': - debit + credit, 'journal_id': journal_id}]
+            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': - debit + credit, 'journal_id': journal_id}]
         return vendor_data
 
     # avoir la montant du stock avec le prix de revient

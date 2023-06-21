@@ -100,11 +100,10 @@ var PosDashboard = AbstractAction.extend({
         //    self.today_sale = result['today_sale']
         // });
       var state = true
-      var search_data = {'is_search': true, 'start_date': la_data["start_date"], 'end_date': la_data["end_date"]};
+      var search_data = {'is_search': false, 'start_date': la_data["start_date"], 'end_date': la_data["end_date"]};
 
       if (la_data["start_date"] === "") {
-          search_data['is_search'] = false;
-          console.log('search data ........ first ........')
+          console.log('search data ........ first ........', search_data);
           var def2 = self._rpc({
                 model: "mini.account.dashboard",
                 method: "get_information",
@@ -113,11 +112,13 @@ var PosDashboard = AbstractAction.extend({
 
       }
       else{
+          search_data['is_search'] = true;
           var def2 = self._rpc({
                 model: "mini.account.dashboard",
                 method: "get_information",
                 args : [state, search_data],
             });
+          console.log('search data ........ 222 ........', search_data);
       }
       def2.then(function (res) {
           self.payment_details = res['customer_data'];

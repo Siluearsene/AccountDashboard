@@ -14,11 +14,13 @@ class AccountDashboardReport(models.AbstractModel):
         account_data = self.env['mini.account.dashboard'].search([('id', '=', active_id)])
         print('convert to dict .......', account_data.mini_cash_dashboard_ids.read())
         print('account data ......................', account_data)
+        date_day = fields.Datetime.now().strftime("%Y-%m-%d") 
+        print("......date_day",date_day)
         return {
             'docs': account_data,
             'cash_data': account_data.mini_cash_dashboard_ids.read(),
             'customer_data': account_data.mini_customer_dashboard_ids.read(),
-            'vendor_data': account_data.mini_vendor_dashboard_ids.read()
-
+            'vendor_data': account_data.mini_vendor_dashboard_ids.read(),
+            'date_day':date_day
         }
 

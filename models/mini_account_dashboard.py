@@ -44,7 +44,7 @@ class MiniAccountDashboard(models.Model):
         companies = self.env['res.company'].sudo().search([])
         company = None
         data = dict()
-        #  verifie s'il y a une date de recherche qui a ete mis dans le dashboard
+        print('search data ...............', search_data)
         if search_data['is_search']:
             data = {
                 'start_date': search_data['start_date'],
@@ -55,7 +55,6 @@ class MiniAccountDashboard(models.Model):
                 'start_date': datetime(fields.Datetime.now().year, 1, 1).strftime("%Y-%m-%d"),
                 'end_date': datetime(fields.Datetime.now().year, 12, 1).strftime("%Y-%m-%d")
             }
-        # verifie si nous somme dans le dashboard ou dans report dashboard
         if state:
             company = tuple(companies.ids)
         else:
@@ -73,13 +72,11 @@ class MiniAccountDashboard(models.Model):
         # client data
         customer_data = self.get_customer_data(data)
         vendor_data = self.get_vendor_data(data)
-        amount_total = sum(rec['amount'] for rec in cash_data) + sum(rec['amount'] for rec in customer_data) + sum(rec['amount'] for rec in vendor_data)
-        amount_total = '{:,}'.format(int(amount_total)).replace(',', ' ')
         # stock_value = self.get_stock_amount_qty()
-        return dict(cash_data=cash_data, customer_data=customer_data, vendor_data=vendor_data, amount_total=amount_total)
+        return dict(cash_data=cash_data, customer_data=customer_data, vendor_data=vendor_data)
 
     def get_customer_data(self, data):
-
+        now_date = datetime.now()
         account_move = self.env['account.move'].search([
             ('invoice_date', '>=', data['start_date']),
             ('invoice_date', '<=', data['end_date']),
@@ -107,6 +104,7 @@ class MiniAccountDashboard(models.Model):
         return customer_data
 
     def get_vendor_data(self, data):
+        now_date = datetime.now()
         account_move = self.env['account.move'].search([
             ('invoice_date', '>=', data['start_date']),
             ('invoice_date', '<=', data['end_date']),
@@ -134,15 +132,11 @@ class MiniAccountDashboard(models.Model):
         return vendor_data
 
     # avoir la montant du stock avec le prix de revient
-    # def get_stock_amount_qty(self):
-    #     product_templates = self.env['product.template'].search([])
-    #     amount_total = sum(tmpl.standard_price * tmpl.qty_available for tmpl in product_templates)
-    #     stock = [{'name': 'Valeur du stock', 'amount': amount_total}]
-    #     return stock
     def get_stock_amount_qty(self):
-        product_templates = self.env['product.template'].search([('qty_available', '>', 0), ('standard_price', '>', 0)])
-        # amount_total = product_templates.search_sum('standard_price * qty_available')
-        return
+        product_templates = self.env['product.template'].search([])
+        amount_total = sum(tmpl.standard_price * tmpl.qty_available for tmpl in product_templates)
+        stock = [{'name': 'Valeur du stock', 'amount': amount_total}]
+        return stock
 
     @api.model
     def _action_open_dashboard_view(self):

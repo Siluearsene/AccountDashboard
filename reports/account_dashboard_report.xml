@@ -32,7 +32,7 @@
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="text-center"  style="margin-bottom: 20px;">
-                    <strong style="font-size: 20px"> TABLEAU DE BORD au Lundi 12 Juin 2023</strong>
+                    <strong style="font-size: 20px"> TABLEAU DE BORD DU <span t-esc="date_day"></span></strong>
                 </div>
                 <div class="page">
                     <div></div>
@@ -180,10 +180,11 @@
                                                     <span t-esc="'{:,}'.format(int(customer['amount'])).replace(',', ' ')"/>
                                                 </td>
                                             </tr>
+                                        </t>
 
                                             <tr style="border-top: none; border-bottom: none;">
                                                 <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
-                                                    Solde au 12/06/2023
+                                                    Solde au <span t-esc="date_day"/>
                                                 </td>
                                                 <td style="padding: 10px;text-align: right;border: none; background-color: #f2f2f2; font-size: 14px">
                                                     <strong>689,103,753</strong>
@@ -201,7 +202,10 @@
                                                 <td style="padding: 20px;border-right: none;text-align: left;"></td>
                                                 <td style="padding: 20px; width: 100%; border-left:none"><strong></strong></td>
                                             </tr>
-                                        </t>
+                                    </tbody>
+                                    <tbody>
+                                        <td style="padding: 10px; width: 65%;text-align: left;border-right: none;"></td>
+                                        <td style="padding: 10px; width: 35%;text-align: right;border-left:none;"></td>
                                     </tbody>
                                 </table>
                                 <div></div>
@@ -216,43 +220,38 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr style="border-top: none; border-bottom: none;">
-                                            <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
-                                                C.A. du 01/01/23 au 12/06/23
-                                            </td>
-                                            <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                5,609,894,665
-                                            </td>
-                                        </tr>
-                                        <tr style="border-top: none; border-bottom: none;">
-                                            <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
-                                                C.A. du 01/01/22 au 12/06/22
-                                            </td>
-                                            <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                2,763,340,245
-                                            </td>
-                                        </tr>
-                                        <tr style="border-top: none; border-bottom: none;">
-                                            <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
-                                                Solde au 12/06/2023
-                                            </td>
-                                            <td style="padding: 10px;text-align: right;border: none; background-color: #f2f2f2; font-size: 14px">
-                                                <strong>1,752,677,791</strong>
-                                            </td>
-                                        </tr>
-                                        <tr style="border-top: none;">
-                                            <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
-                                                Versement non encaissés
-                                            </td>
-                                            <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                0
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 20px;border-right: none;text-align: left;"></td>
-                                            <td style="padding: 20px; width: 100%; border-left:none"><strong></strong></td>
-                                        </tr>
+                                      <t t-foreach="vendor_data" t-as="vendor">
+                                            <tr style="border-top: none; border-bottom: none;">
+                                                <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
+                                                    C.A. du <span t-esc="vendor['start_date']"/> au  <span t-esc="vendor['end_date']"/>
+                                                </td>
+                                                <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
+                                                    <span t-esc="vendor['amount']"/> 
+                                                </td>
+                                            </tr>
+                                      </t>
+                                            <tr style="border-top: none; border-bottom: none;">
+                                                <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
+                                                    Solde au <span t-esc="date_day"/>
+                                                </td>
+                                                <td style="padding: 10px;text-align: right;border: none; background-color: #f2f2f2; font-size: 14px">
+                                                    <strong>1,752,677,791</strong>
+                                                </td>
+                                            </tr>
+                                            <tr style="border-top: none;">
+                                                <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
+                                                    Versement non encaissés
+                                                </td>
+                                                <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
+                                                    0
+                                                </td>
+                                            </tr>
                                     </tbody>
+                                    <tbody>
+                                        <td style="padding: 10px; width: 65%;text-align: left;border-right: none;"></td>
+                                        <td style="padding: 10px; width: 35%;text-align: right;border-left:none;"></td>
+                                    </tbody>
+
                                 </table>
                                 <div></div>
                             </div>

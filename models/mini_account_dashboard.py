@@ -29,7 +29,8 @@ class MiniAccountDashboard(models.Model):
         company = tuple(self.env.context['allowed_company_ids'])
         state = False
         res = super(MiniAccountDashboard, self).default_get(fields_list)
-        data = self.get_information(state)
+        search_data = {'is_search': False}
+        data = self.get_information(state, search_data)
         cash = [(0, 0, rec) for rec in data.get('cash_data')]
         customer = [(0, 0, record) for record in data.get('customer_data')]
         vendor = [(0, 0, record) for record in data.get('vendor_data')]
@@ -50,8 +51,8 @@ class MiniAccountDashboard(models.Model):
             }
         else:
             data = {
-                'start_date': self.start_date,
-                'end_date': self.end_date
+                'start_date': datetime(fields.Datetime.now().year, 1, 1).strftime("%Y-%m-%d"),
+                'end_date': datetime(fields.Datetime.now().year, 1, 1).strftime("%Y-%m-%d")
             }
         if state:
             company = tuple(companies.ids)

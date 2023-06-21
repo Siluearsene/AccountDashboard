@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_repair_dashboard" model="ir.actions.client">
+            <field name="name">Tableau de bord pagani</field>
+            <field name="tag">repair_order_dashboard</field>
+        </record>
+
+        <menuitem id="chiffre_affaire"
+                  name="Chiffre d'affaire"
+                  parent="repair_order.menu_repair_order_analyse"
+                  sequence="20"
+                  action="action_repair_dashboard"
+        />
+
+    </data>
+</odoo>

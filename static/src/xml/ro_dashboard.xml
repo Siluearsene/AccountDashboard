@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <!--Section titre et choix de la période-->
+    <t t-name="RoDashboard">
+        <div class="oh_dashboards">
+            <div class="main-header">
+                <div style="font-size: 30px; margin-top:30px;margin-left:0px; margin-bottom: 50px;">
+                    <span class="display-4 d-flex justify-content-center" style="text-align:center;">
+                        RAPPORT D'ACTIVITÉ <t style="text-transform:uppercase;" t-esc="widget.company_name"/>
+                    </span>
+                </div>
+                <div class="row container form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label for="start_date">Date de début</label>
+                        <input class="form-control" type="date" id="start_date" name="start_date"
+                               t-att-value="widget.default_start_date"/>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label for="end_date">Date de fin</label>
+                        <input class="form-control" type="date" id="end_date" name="end_date"
+                               t-att-value="widget.default_end_date"/>
+                    </div>
+                    <button class="o_change_period col-xs-12 col-sm-12 col-md-4 col-lg-4 button-style btn btn-outline-primary"
+                            type="submit">
+                        Charger la période
+                    </button>
+                </div>
+
+                <div class="container" style="margin-top: 3%;">
+                    <div class="row date-period">
+                        <div class="col-12 h2 d-flex justify-content-center start-date">
+                            <t t-if="widget.default_start_date">Période : </t>
+                            <t t-esc="widget.default_start_date"/>
+                            <t t-if="widget.default_end_date"> - </t>
+                            <t t-esc="widget.default_end_date"/>
+                        </div>
+                    </div>
+                    <hr class="my-2"/>
+                </div>
+                <div class="container-fluid o_ro_dashboard">
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"/>
+            </div>
+        </div>
+    </t>
+
+    <!-- section total chiffre d'affaires et total entrées -->
+    <t t-name="RoTotal">
+        <div class="row main-section" style="margin-left: 2%;">
+            <div class="row">
+                <!-- box total entrées -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="general-layout">
+                        <div class="icon-layout">
+                            <div class="col-3">
+                                <i class="fa fa-gears icon-custom"/>
+                            </div>
+                            <div class="col-6 title-custom">
+                                TOTAL D'ENTRÉE
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 content-layout">
+                            <div class="stat_count"><t t-esc="widget.total_entree"/></div>
+                        </div>
+                    </div>
+                </div>
+
+<!--                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>-->
+
+                <!-- box total CA TTC -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="general-layout">
+                        <div class="icon-layout">
+                            <div class="col-3">
+                                <i class="fa fa-money icon-custom"/>
+                            </div>
+                            <div class="col-6 title-custom">
+                                CA TOTAL <br/>
+                                COMPTABILISÉ TTC
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 content-layout">
+                            <div class="stat_count"><t t-esc="widget.ca_ttc"/></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- box total CA HT -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="general-layout">
+                        <div class="icon-layout">
+                            <div class="col-3">
+                                <i class="fa fa-money icon-custom"/>
+                            </div>
+                            <div class="col-6 title-custom">
+                                CA TOTAL <br/>
+                                COMPTABILISÉ HT
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 content-layout">
+                            <div class="stat_count"><t t-esc="widget.ca_ht"/></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- box total CA comptabilisé et payé -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="general-layout">
+                        <div class="icon-layout">
+                            <div class="col-3">
+                                <i class="fa fa-money icon-custom"/>
+                            </div>
+                            <div class="col-6 title-custom">
+                                CA COMPTABILISÉ
+                                <br/>
+                                NON-PAYÉ TTC
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 content-layout">
+                            <div class="stat_count"><t t-esc="widget.ca_cnp"/></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- box total CA comptabilisé et non-payé -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="general-layout">
+                        <div class="icon-layout">
+                            <div class="col-3">
+                                <i class="fa fa-money icon-custom"/>
+                            </div>
+                            <div class="col-6 title-custom">
+                                CA COMPTABILISÉ
+                                <br/>
+                                PAYÉ TTC
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 content-layout">
+                            <div class="stat_count"><t t-esc="widget.ca_cp"/></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- box total CA non comptabilisé TTC -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="general-layout">
+                        <div class="icon-layout">
+                            <div class="col-3">
+                                <i class="fa fa-money icon-custom"/>
+                            </div>
+                            <div class="col-6 title-custom">
+                                CA NON COMPTABILISÉ
+                                <br/>
+                                TTC
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 content-layout">
+                            <div class="stat_count"><t t-esc="widget.ca_nc"/></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </t>
+
+    <!--section graph chiffres d'affaires et entrées par ateliers-->
+    <t t-name="RoChart">
+        <div class="row">
+            <div class="row graph-style" style="margin-top: 15px;">
+                <div class="col-sm-6 col-lg-6 graph-box">
+                    <div class="oh-card text-color">
+                        <div class="oh-card-body pb-0">
+                            <h4 class="mb-0">
+                            </h4>
+                        </div>
+                        <canvas class="enters_report" width="700" height="500"/>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-6 col-md-6 graph-box">
+                    <div class="oh-card text-color">
+                        <div class="oh-card-body pb-0">
+                            <h4 class="mb-0">
+                            </h4>
+                        </div>
+                        <canvas class="invoice_report_graph" width="400" height="320"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!--section détails chiffres d'affaires et entrée par ateliers-->
+    <t t-name="RoDetails">
+        <div class="employee_dashboard_main">
+            <div class="row main-section">
+                <div class="col-md-3 col-lg-3">
+                    <div class="hr_notification box-work" style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;
+                            will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
+                            overflow-y: auto;margin-bottom: 15px;">
+                        <div class="hr_notification_head"
+                             style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #ed1c24;margin-bottom: 9px;
+                                            font-weight: bold;">
+                            Atelier mécanique
+                        </div>
+                        <div class="col-sm-12 col-lg-12  detail-work">
+                            <div class="text-color">
+                                <div class="">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: start;">Entrées&#160;&#160;&#160;</th>
+                                                        <th style="text-align: end;">
+                                                            <t t-esc="widget.entree_mecha"/>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="text-align: start;">Chiffre d'affaire HT&#160;&#160;&#160;</th>
+                                                        <th style="text-align: end;">
+                                                            <t t-esc="widget.cac_mecha"/>
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-lg-3">
+                    <div class="hr_notification box-work"
+                         style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;
+                                 will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
+                                 overflow-y: auto;margin-bottom: 15px;">
+                        <div class="hr_notification_head"
+                             style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #ed1c24;;margin-bottom: 9px;
+                                            font-weight: bold;">
+                            Atelier tôlerie
+                        </div>
+                        <div class="col-sm-12 col-lg-12 detail-work">
+                            <div class="text-color">
+                                <div class="">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: start;">Entrées&#160;&#160;&#160;</th>
+                                                        <th style="text-align: end;">
+                                                            <t t-esc="widget.entree_carrosserie"/>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="text-align: start;">Chiffre d'affaire HT&#160;&#160;&#160;</th>
+                                                        <th style="text-align: end;">
+                                                            <t t-esc="widget.cac_carrosserie"/>
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <div class="hr_notification box-work"
+                         style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;
+                                 will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
+                                 overflow-y: auto;margin-bottom: 15px;">
+                        <div class="hr_notification_head"
+                             style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #ed1c24;margin-bottom: 9px;
+                                            font-weight: bold;">
+                            Atelier peinture
+                        </div>
+                        <div class="col-sm-12 col-lg-12 detail-work">
+                            <div class="text-color">
+                                <div class="">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: start;">Entrées&#160;&#160;&#160;</th>
+                                                        <th style="text-align: end;">
+                                                            <t t-esc="widget.entree_painting"/>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="text-align: start;">Chiffre d'affaire HT&#160;&#160;&#160;</th>
+                                                        <th style="text-align: end;">
+                                                            <t t-esc="widget.cac_painting"/>
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3">
+                    <div class="hr_notification box-work"
+                         style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;
+                                 will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
+                                 overflow-y: auto;margin-bottom: 15px;">
+                        <div class="hr_notification_head"
+                             style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #ed1c24;margin-bottom: 9px;
+                                            font-weight: bold;">
+                            Autre
+                        </div>
+                        <div class="col-sm-12 col-lg-12 detail-work">
+                            <div class="text-color">
+                                <div class="">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: start;">Entrées&#160;&#160;&#160;</th>
+                                                        <th style="text-align: end;">
+                                                            <t t-esc="widget.entree_autre"/>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="text-align: start;">Chiffre d'affaire HT&#160;&#160;&#160;</th>
+                                                        <th style="text-align: end;">
+                                                            <t t-esc="widget.cac_autre"/>
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
+

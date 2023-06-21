@@ -9,12 +9,50 @@
 
     <t t-name="PosCustomer">
          <div class="employee_dashboard_main">
+         <div class="main-header">
+                <div style="font-size: 30px; margin-top:30px;margin-left:0px; margin-bottom: 50px;">
+                    <span class="display-4 d-flex justify-content-center" style="text-align:center;">
+                        RAPPORT D'ACTIVITÉ <t style="text-transform:uppercase;" t-esc="widget.company_name"/>
+                    </span>
+                </div>
+                <div class="row container form-row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label for="start_date">Date de début</label>
+                        <input class="form-control" type="date" id="start_date" name="start_date"
+                               t-att-value="widget.default_start_date" />
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <label for="end_date">Date de fin</label>
+                        <input class="form-control" type="date" id="end_date" name="end_date"
+                               t-att-value="widget.default_end_date"/>
+                    </div>
+                    <button class="o_change_period col-xs-12 col-sm-12 col-md-4 col-lg-4 button-style btn btn-outline-primary"
+                            type="submit">
+                        Charger la période
+                    </button>
+                </div>
+
+                <div class="container" style="margin-top: 3%;">
+                    <div class="row date-period">
+                        <div class="col-12 h2 d-flex justify-content-center start-date">
+                            <t t-if="widget.default_start_date">Période : </t>
+                            <t t-esc="widget.default_start_date"/>
+                            <t t-if="widget.default_end_date"> - </t>
+                            <t t-esc="widget.default_end_date"/>
+                        </div>
+                    </div>
+                    <hr class="my-2"/>
+                </div>
+                <div class="container-fluid o_ro_dashboard">
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"/>
+        </div>
         <div class="row main-section">
             <div class="col-md-4 col-lg-4">
                 <div class="hr_notification" style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
                 height: 316px;overflow-y: auto;margin-bottom: 15px;">
                     <div class="hr_notification_head"
-                         style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #de6a5e;margin-bottom: 9px;">
+                         style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #ec1b23;margin-bottom: 9px;">
                    TRESORERIE
                     </div>
                     <div class="col-sm-12 col-lg-12" style="padding:0;">
@@ -54,7 +92,7 @@
                     <div class="hr_notification" style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
                     height: 316px;overflow-y: auto;margin-bottom: 15px;">
                         <div class="hr_notification_head"
-                             style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background:#de6a5e;;margin-bottom: 9px;">
+                             style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background:#ec1b23;;margin-bottom: 9px;">
                           CLIENTS
                         </div>
                         <div class="col-sm-12 col-lg-12" style="padding:0;">
@@ -97,7 +135,7 @@
                 <div class="hr_notification" style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
                 height: 316px;overflow-y: auto;margin-bottom: 15px;">
                     <div class="hr_notification_head"
-                         style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #de6a5e;margin-bottom: 9px;">
+                         style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #ec1b23;margin-bottom: 9px;">
                  FOURNISSEURS
                     </div>
                     <div class="col-sm-12 col-lg-12" style="padding:0;">
@@ -134,88 +172,43 @@
                             </div>
                     </div>
             </div>
-
-            <div class="col-md-4 col-lg-4">
-                <div class="hr_notification" style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
-                height: 316px;overflow-y: auto;margin-bottom: 15px;">
-                    <div class="hr_notification_head"
-                         style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #de6a5e;margin-bottom: 9px;">
-                 VALEUR STOCK AU PRIX DE REVIENT
-                    </div>
-                    <div class="col-sm-12 col-lg-12" style="padding:0;">
-                            <div class="text-color">
-                                <div class="">
-                                <div class="media">
-                                <div class="media-body">
-                                    <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th rowspan="12">Libele&#160;&#160;&#160;</th>
-                                                <th rowspan="12">Montant</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                             <t t-foreach="widget.stock_value" t-as="stock">
-                                                <tr>
-                                                    <td>
-                                                        <h2 class="text-color display-6" style="font-size: 15px;">
-                                                            <t t-esc="stock['name']"/>
-                                                        </h2>
-                                                    </td>
-                                                    <td>
-                                                        <h2 class="text-color display-6" style="font-size: 15px;">
-                                                            <t t-esc="stock['amount']"/>
-                                                        </h2>
-                                                    </td>
-                                                </tr>
-                                            </t>
-                                        </tbody>
-                                    </table>
-                                </div></div></div></div>
+             <!-- box total CA TTC -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="general-layout">
+                        <div class="icon-layout">
+                            <div class="col-3">
+                                <i class="fa fa-money icon-custom"/>
                             </div>
-                    </div>
-            </div>
-
-            <div class="col-md-4 col-lg-4">
-                <div class="hr_notification" style="background: #fff;transition: transform 0.2s ease, box-shadow 0.2s ease;will-change: transform, box-shadow;box-shadow: 0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06);
-                height: 316px;overflow-y: auto;margin-bottom: 15px;">
-                    <div class="hr_notification_head"
-                         style="font-size: 17px;text-align: center;padding: 12px 0;color: #fff;font-weight: 300;background: #de6a5e;margin-bottom: 9px;">
-                 SITUATION NETTE
-                    </div>
-                    <div class="col-sm-12 col-lg-12" style="padding:0;">
-                            <div class="text-color">
-                                <div class="">
-                                <div class="media">
-                                <div class="media-body">
-                                    <table class="table table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th rowspan="12">Periode&#160;&#160;&#160;</th>
-                                                <th rowspan="12">Montant</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                             <t t-foreach="widget.selling_product" t-as="session">
-                                                <tr>
-                                                    <td>
-                                                        <h2 class="text-color display-6" style="font-size: 15px;">
-                                                            <t t-esc="session['session']"/>
-                                                        </h2>
-                                                    </td>
-                                                    <td>
-                                                        <h2 class="text-color display-6" style="font-size: 15px;">
-                                                            <t t-esc="session['status']"/>
-                                                        </h2>
-                                                    </td>
-                                                </tr>
-                                            </t>
-                                        </tbody>
-                                    </table>
-                                </div></div></div></div>
+                            <div class="col-6 title-custom">
+                                VALEUR STOCK AU PRIX DE REVIENT
                             </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 content-layout">
+                            <div class="stat_count"><t t-esc="widget.ca_ttc"/></div>
+                        </div>
                     </div>
-            </div>
+                </div>
+
+                <!-- box total CA HT -->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="general-layout">
+                        <div class="icon-layout">
+                             <div class="col-3">
+                                <i class="fa fa-money icon-custom"/>
+                            </div>
+                            <div class="col-6 title-custom">
+                                SITUATION NETTE
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 content-layout">
+                            <div class="stat_count"><t t-esc="widget.ca_ht"/></div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
          </div>

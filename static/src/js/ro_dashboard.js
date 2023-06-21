@@ -112,11 +112,13 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
                     break;
                 }
             }
+            var state = true;
             // Si une période n'est pas choisie, on fait un affichage apr défaut
             if (la_data["start_date"] === "") {
                 var def1 = this._rpc({
                     model: "mini.account.dashboard",
                     method: "get_information",
+                    args: [state]
                 });
             }
             // sion, on tien compte de la valeur de la_data et on la passe en paramètre de get_repair_order_details
@@ -124,7 +126,7 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
                 var def1 = this._rpc({
                     model: "mini.account.dashboard",
                     method: "get_information",
-                    args: [la_data],
+                    args: [state],
                 });
             }
             def1.then(function (result) {

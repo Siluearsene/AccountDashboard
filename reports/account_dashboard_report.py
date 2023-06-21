@@ -16,6 +16,38 @@ class AccountDashboardReport(models.AbstractModel):
         print('account data ......................', account_data)
         date_day = fields.Datetime.now().strftime("%Y-%m-%d") 
         print("......date_day",date_day)
+        
+        # recherche 
+        # pour afficher le solde fournisseur 
+        account_move = self.env['account.move'].search([
+            ('invoice_date', '>=', data['start_date']),
+            ('invoice_date', '<=', data['end_date']),
+            ('move_type', '=', 'in_invoice'),
+            ('state', '=', 'posted'),
+        ])
+        account_payment = self.env['account.payment'].search([
+            ('date', '>=', data['start_date']),
+            ('date', '<=', data['end_date']),
+            ('payment_type', '=', 'outbound'),
+            ('partner_type', '=', 'supplier'),
+            ('state', '=', 'posted'),
+        ])
+        # recherche 
+        # pour afficher le solde client
+        account_move = self.env['account.move'].search([
+            ('invoice_date', '>=', data['start_date']),
+            ('invoice_date', '<=', data['end_date']),
+            ('move_type', '=', 'out_invoice'),
+            ('state', '=', 'posted'),
+        ])
+
+        account_payment = self.env['account.payment'].search([
+            ('date', '>=', data['start_date']),
+            ('date', '<=', data['end_date']),
+            ('payment_type', '=', 'inbound'),
+            ('partner_type', '=', 'customer'),
+            ('state', '=', 'posted'),
+        ]) 
         return {
             'docs': account_data,
             'cash_data': account_data.mini_cash_dashboard_ids.read(),

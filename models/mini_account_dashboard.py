@@ -111,7 +111,6 @@ class MiniAccountDashboard(models.Model):
             ('move_type', '=', 'in_invoice'),
             ('state', '=', 'posted'),
         ])
-
         account_payment = self.env['account.payment'].search([
             ('date', '>=', data['start_date']),
             ('date', '<=', data['end_date']),

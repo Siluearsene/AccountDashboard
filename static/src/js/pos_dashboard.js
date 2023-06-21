@@ -111,6 +111,7 @@ var PosDashboard = AbstractAction.extend({
           self.top_salesperson = res['cash_data'];
           self.selling_product = res['vendor_data'];
           self.amount_total = res['amount_total']
+          self.stock_value = res['stock_value']
 
           if (la_data["start_date"] !== "") {
               self.default_start_date = la_data["start_date"];

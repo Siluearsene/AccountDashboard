@@ -72,8 +72,12 @@ class MiniAccountDashboard(models.Model):
         # client data
         customer_data = self.get_customer_data(data)
         vendor_data = self.get_vendor_data(data)
-        # stock_value = self.get_stock_amount_qty()
-        return dict(cash_data=cash_data, customer_data=customer_data, vendor_data=vendor_data)
+        amount_total = sum(rec['amount'] for rec in cash_data) + sum(rec['amount'] for rec in customer_data) - sum(
+            rec['amount'] for rec in vendor_data) + self.get_stock_amount_qty()
+        amount_total = '{:,}'.format(int(amount_total)).replace(',', ' ')
+        stock_value = self.get_stock_amount_qty()
+        return dict(cash_data=cash_data, customer_data=customer_data, vendor_data=vendor_data,
+                    amount_total=amount_total, stock_value=stock_value)
 
     def get_customer_data(self, data):
         now_date = datetime.now()
@@ -100,7 +104,8 @@ class MiniAccountDashboard(models.Model):
         if account_payment:
             credit = sum(account_payment.mapped('amount'))
         customer_data = [
-            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': debit - credit, 'journal_id': journal_id}]
+            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': debit - credit,
+             'journal_id': journal_id}]
         return customer_data
 
     def get_vendor_data(self, data):
@@ -128,15 +133,16 @@ class MiniAccountDashboard(models.Model):
         if account_payment:
             credit = sum(account_payment.mapped('amount'))
         vendor_data = [
-            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': - debit + credit, 'journal_id': journal_id}]
+            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': - debit + credit,
+             'journal_id': journal_id}]
         return vendor_data
 
     # avoir la montant du stock avec le prix de revient
     def get_stock_amount_qty(self):
-        product_templates = self.env['product.template'].search([])
+        product_templates = self.env['product.template'].search([('qty_available', '>', 0), ('standard_price', '>', 0)],
+                                                                limit=None)
         amount_total = sum(tmpl.standard_price * tmpl.qty_available for tmpl in product_templates)
-        stock = [{'name': 'Valeur du stock', 'amount': amount_total}]
-        return stock
+        return amount_total
 
     @api.model
     def _action_open_dashboard_view(self):

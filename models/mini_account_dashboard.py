@@ -53,7 +53,7 @@ class MiniAccountDashboard(models.Model):
         else:
             data = {
                 'start_date': datetime(fields.Datetime.now().year, 1, 1).strftime("%Y-%m-%d"),
-                'end_date': datetime(fields.Datetime.now().year, 1, 1).strftime("%Y-%m-%d")
+                'end_date': datetime(fields.Datetime.now().year, 12, 1).strftime("%Y-%m-%d")
             }
         if state:
             company = tuple(companies.ids)

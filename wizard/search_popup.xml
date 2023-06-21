@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="search_popup_wizard_view" model="ir.ui.view">
+            <field name="name">search.popup.wizard.form</field>
+            <field name="model">search.popup.wizard</field>
+            <field name="arch" type="xml">
+            <form string="Search">
+                <group>
+                    <div name="options">
+                        <h3>Type de recherche</h3>
+                        <br/>
+                        <span class="d-inline-block" attrs="{'invisible':['|',('is_vendor','=',True),('is_cash','=',True)]}">
+                            <field name="is_customer" widget="boolean_toggle"/>
+                            <label for="is_customer"/>
+                        </span>
+                        <span class="d-inline-block" attrs="{'invisible':['|',('is_customer','=',True),('is_cash','=',True)]}">
+                            <field name="is_vendor" widget="boolean_toggle"/>
+                            <label for="is_vendor"/>
+                        </span>
+                        <span class="d-inline-block" attrs="{'invisible':['|',('is_customer','=',True),('is_vendor','=',True)]}">
+                            <field name="is_cash" widget="boolean_toggle"/>
+                            <label for="is_cash"/>
+                        </span>
+                        <br/>
+                        <br/>
+                    </div>
+                    <group>
+                        <field name="company_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+
+                </group>
+                <footer>
+                    <button string="Confirmer" name="action_update_information" type="object" default_focus="1" class="btn-primary" data-hotkey="q"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+    </data>
+
+</odoo>

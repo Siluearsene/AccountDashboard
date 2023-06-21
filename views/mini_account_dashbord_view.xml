@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <record id="mini_account_dashboard_form_view" model="ir.ui.view">
+            <field name="name">mini.account.dashboard.form</field>
+            <field name="model">mini.account.dashboard</field>
+            <field name="arch" type="xml">
+                <form create="0">
+                    <header>
+                        <button name="action_search_data" type="object" string=" Faire une recherche"/>
+                        <button name="action_print_reports" type="object" string="Imprimer le rapport"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="start_date" readonly="1" force_save="1"/>
+                                <field name="end_date" readonly="1" force_save="1"/>
+                            </group>
+                            <group>
+                                <field name="company_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                             <page string="Tresorie">
+                               <field name="mini_cash_dashboard_ids" readonly="1" force_save="1">
+                                 <tree editable="bottom">
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="account_dashboard_id" invisible="1"/>
+                                    <field name="name" width="2"/>
+                                    <field name="company_id" width="2"/>
+                                    <field name="amount" sum="Solde" width="2"/>
+                                 </tree>
+                              </field>
+                             </page>
+                            <page string="Clients">
+                               <field name="mini_customer_dashboard_ids" readonly="1" force_save="1">
+                                 <tree editable="bottom">
+                                    <field name="journal_id" invisible="1" width="2"/>
+                                    <field name="start_date" width="2"/>
+                                    <field name="end_date" width="2"/>
+                                    <field name="name" width="2"/>
+                                    <field name="amount" sum="Solde" width="2"/>
+                                 </tree>
+                              </field>
+                             </page>
+                            <page string="Fournisseurs">
+                               <field name="mini_vendor_dashboard_ids" readonly="1" force_save="1">
+                                 <tree editable="bottom">
+                                    <field name="start_date" width="2"/>
+                                    <field name="end_date" width="2"/>
+                                    <field name="name" width="2"/>
+                                    <field name="amount" sum="Solde" width="2"/>
+                                 </tree>
+                              </field>
+                             </page>
+                         </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="mini_account_dashboard_tree_view" model="ir.ui.view">
+            <field name="name">mini.account.dashboard.tree</field>
+            <field name="model">mini.account.dashboard</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state" widget="badge" decoration-warning = "state == 'draft'" decoration-success = "state == 'done'"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ir_actions_server_mini_account_dashboard_view" model="ir.actions.server">
+            <field name="name">Dashboard</field>
+            <field name="model_id" ref="dashboard_account.model_mini_account_dashboard" />
+            <field name="state">code</field>
+            <field name="binding_view_types">form</field>
+            <field name="code">
+action = env['mini.account.dashboard']._action_open_dashboard_view()
+            </field>
+        </record>
+
+        <menuitem name="Tableau de bord"
+                  id="root_mini_dashboard_menu"
+                  parent="account.menu_finance_reports"
+                  action="ir_actions_server_mini_account_dashboard_view"
+                  sequence="1"
+        />
+        <menuitem name="rapport Tableau de bord"
+                  id="root_mini_dashboard_menu_reports"
+                  parent="root_mini_dashboard_menu"
+                  action="ir_actions_server_mini_account_dashboard_view"
+                  sequence="2"
+        />
+
+    </data>
+</odoo>

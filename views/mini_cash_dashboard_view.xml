@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <record id="mini_cash_dashboard_form_view" model="ir.ui.view">
+            <field name="name">mini.cash.dashboard.form</field>
+            <field name="model">mini.cash.dashboard</field>
+            <field name="arch" type="xml">
+               <tree editable="bottom">
+                    <field name="journal_id" invisible="1"/>
+                    <field name="account_dashboard_id" invisible="1"/>
+                    <field name="name" width="2"/>
+                    <field name="amount" width="2"/>
+               </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

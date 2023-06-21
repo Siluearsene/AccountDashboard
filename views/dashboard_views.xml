@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="action_pos_dashboard" model="ir.actions.client">
+            <field name="name">Dashboard</field>
+            <field name="tag">account_dashboard</field>
+        </record>
+
+        <menuitem name="Dashboard" id="account_dashboard" parent="dashboard_account.root_mini_dashboard_menu"
+                  sequence="1"
+                  action="action_pos_dashboard"/>
+    </data>
+
+</odoo>

@@ -7,9 +7,15 @@
     'category': 'Dashboard',
     'author': 'Emmanuel Seri Koubi',
     'website': "https://www.progistack.com",
-    'depends': ['account', 'repair_order', 'sale', 'permission_manager'],
+    'depends': ['account_accountant'],
     'data': [
+        'security/ir.model.access.csv',
         'views/dashboard_menues.xml',
+        'views/mini_account_dashbord_view.xml',
+        'views/views.xml',
+        'views/dashboard_views.xml',
+        'reports/account_dashboard_report.xml',
+        'wizard/search_popup.xml',
     ],
     'assets': {
         'web.assets_backend': [

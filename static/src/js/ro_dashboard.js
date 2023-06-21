@@ -643,7 +643,7 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
         },
     });
 
-    core.action_registry.add("repair_order_dashboard", RoDashboard);
+    core.action_registry.add("account_dashboard", RoDashboard);
 
     return RoDashboard;
 });

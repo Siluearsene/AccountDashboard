@@ -10,7 +10,6 @@
     'depends': ['account_accountant'],
     'data': [
         'security/ir.model.access.csv',
-        'views/dashboard_menues.xml',
         'views/mini_account_dashbord_view.xml',
         'views/views.xml',
         'views/dashboard_views.xml',
@@ -19,9 +18,9 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'repair_order_dashboard/static/src/xml/ro_dashboard.xml',
-            'repair_order_dashboard/static/src/js/ro_dashboard.js',
-            'repair_order_dashboard/static/src/css/ro_dashboard.css',
+            'account_dashboard/static/src/xml/ro_dashboard.xml',
+            'account_dashboard/static/src/js/ro_dashboard.js',
+            'account_dashboard/static/src/css/ro_dashboard.css',
             'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js',
         ],
     },

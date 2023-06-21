@@ -125,17 +125,8 @@ class MiniAccountDashboard(models.Model):
     def get_stock_amount_qty(self):
         product_templates = self.env['product.template'].search([])
         amount_total = sum(tmpl.standard_price * tmpl.qty_available for tmpl in product_templates)
-        print('Valeur du stock:', amount_total)
         stock = [{'name': 'Valeur du stock', 'amount': amount_total}]
         return stock
-
-    def action_update_data(self):
-        company = tuple(self.company_ids.ids)
-        for rec in self:
-            cash_vals = [(0, 0, record) for record in self.get_information(company).get('cash_data')]
-            customer_vals = [(0, 0, record) for record in self.get_information(company).get('customer_data')]
-            rec.write({'mini_cash_dashboard_ids': cash_vals})
-            rec.update({'mini_customer_dashboard_ids': customer_vals})
 
     @api.model
     def _action_open_dashboard_view(self):

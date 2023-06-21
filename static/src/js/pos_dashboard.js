@@ -12,7 +12,7 @@ var _t = core._t;
 var QWeb = core.qweb;
 
 var PosDashboard = AbstractAction.extend({
-    template: 'PosDashboard',
+    template: 'AccountDashboard',
     events: {
             //'click .pos_order_today':'pos_order_today',
             //'click .pos_order':'pos_order',
@@ -66,17 +66,17 @@ var PosDashboard = AbstractAction.extend({
 
     fetch_data: function() {
         var self = this;
-        var def1 =  this._rpc({
-                model: 'pos.order',
-                method: 'get_refund_details'
-        }).then(function(result) {
-           self.total_sale = result['total_sale'],
-           self.total_order_count = result['total_order_count']
-           self.total_refund_count = result['total_refund_count']
-           self.total_session = result['total_session']
-           self.today_refund_total = result['today_refund_total']
-           self.today_sale = result['today_sale']
-        });
+        // var def1 =  this._rpc({
+        //         model: 'pos.order',
+        //         method: 'get_refund_details'
+        // }).then(function(result) {
+        //    self.total_sale = result['total_sale'],
+        //    self.total_order_count = result['total_order_count']
+        //    self.total_refund_count = result['total_refund_count']
+        //    self.total_session = result['total_session']
+        //    self.today_refund_total = result['today_refund_total']
+        //    self.today_sale = result['today_sale']
+        // });
       var state = true
       var def2 = self._rpc({
             model: "mini.account.dashboard",
@@ -89,7 +89,7 @@ var PosDashboard = AbstractAction.extend({
             self.selling_product = res['vendor_data'];
 //            self.stock_value = res['stock_value'];
         });
-        return $.when(def1,def2);
+        return $.when(def2);
     },
 
     render_dashboards: function() {

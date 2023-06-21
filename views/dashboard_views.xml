@@ -5,7 +5,7 @@
             <field name="tag">account_dashboard</field>
         </record>
 
-        <menuitem name="Dashboard" id="account_dashboard" parent="dashboard_account.root_mini_dashboard_menu"
+        <menuitem name="Dashboard" id="account_dashboard" parent="account_dashboard.root_mini_dashboard_menu"
                   sequence="1"
                   action="action_pos_dashboard"/>
     </data>

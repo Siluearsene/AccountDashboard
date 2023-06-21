@@ -135,7 +135,7 @@ class MiniAccountDashboard(models.Model):
         return {
             "type": "ir.actions.act_window",
             "res_model": "mini.account.dashboard",
-            "views": [[self.env.ref('dashboard_account.mini_account_dashboard_form_view').id, "form"], [False, "tree"],
+            "views": [[self.env.ref('account_dashboard.mini_account_dashboard_form_view').id, "form"], [False, "tree"],
                       [False, "kanban"]],
             'view_mode': 'form',
             "domain": [],
@@ -146,7 +146,7 @@ class MiniAccountDashboard(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'search.popup.wizard',
-            'views': [[self.env.ref('dashboard_account.search_popup_wizard_view').id, 'form']],
+            'views': [[self.env.ref('account_dashboard.search_popup_wizard_view').id, 'form']],
             'view_type': 'form',
             'view_mode': 'form',
             'target': 'new',
@@ -156,4 +156,4 @@ class MiniAccountDashboard(models.Model):
 
     def action_print_reports(self):
         data = {'active_id': self.env.context.get('active_id')}
-        return self.env.ref('dashboard_account.report_account_dashboard').report_action(self, data=data)
+        return self.env.ref('account_dashboard.report_account_dashboard').report_action(self, data=data)

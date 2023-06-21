@@ -21,8 +21,8 @@
         <field name="name">Rapport de compte</field>
         <field name="model">mini.account.dashboard</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">dashboard_account.account_dashboard_report</field>
-        <field name="report_file">dashboard_account.account_dashboard_report</field>
+        <field name="report_name">account_dashboard.account_dashboard_report</field>
+        <field name="report_file">account_dashboard.account_dashboard_report</field>
         <field name="paperformat_id" ref="paperformat_account_dashboard"/>
         <field name="binding_model_id" eval="False"/>
         <field name="binding_type">report</field>
@@ -266,7 +266,7 @@
 
     <template id="account_dashboard_report">
         <t t-foreach="docs" t-as="o">
-            <t t-call="dashboard_account.account_dashboard_document" t-lang="o.env.lang"/>
+            <t t-call="account_dashboard.account_dashboard_document" t-lang="o.env.lang"/>
         </t>
     </template>
 </odoo>

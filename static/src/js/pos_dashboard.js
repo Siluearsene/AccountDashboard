@@ -27,6 +27,7 @@ var PosDashboard = AbstractAction.extend({
         this.top_salesperson = [];
         this.selling_product = [];
         this.stock_value = [];
+        this.amount_total = 0
     },
 
     willStart: function() {
@@ -66,12 +67,10 @@ var PosDashboard = AbstractAction.extend({
                             var c = parseInt(cookies[i].split("=")[1]);
                             c += 1;
                             document.cookie = "compteur=" + c;
-                            console.log("Compteur get_cookie increment :", c);
                         }
                     } else {
                         if (i === cookies.length - 1 && temp === 0) {
                             document.cookie = "compteur=" + 0;
-                            console.log("Compteur get_cookie cree");
                         }
                     }
                 }
@@ -79,7 +78,6 @@ var PosDashboard = AbstractAction.extend({
                 if (c > 1) {
                     self.set_used_date("1");
                     document.cookie = "compteur=" + 0;
-                    console.log("Compteur cookie réinitialisé");
                 }
 
         });
@@ -88,19 +86,8 @@ var PosDashboard = AbstractAction.extend({
     fetch_data: function() {
         var self = this;
         var la_data = self.get_cookie();
-        // var def1 =  this._rpc({
-        //         model: 'pos.order',
-        //         method: 'get_refund_details'
-        // }).then(function(result) {
-        //    self.total_sale = result['total_sale'],
-        //    self.total_order_count = result['total_order_count']
-        //    self.total_refund_count = result['total_refund_count']
-        //    self.total_session = result['total_session']
-        //    self.today_refund_total = result['today_refund_total']
-        //    self.today_sale = result['today_sale']
-        // });
-      var state = true
-      var search_data = {'is_search': false, 'start_date': la_data["start_date"], 'end_date': la_data["end_date"]};
+        var state = true
+        var search_data = {'is_search': false, 'start_date': la_data["start_date"], 'end_date': la_data["end_date"]};
 
       if (la_data["start_date"] === "") {
           console.log('search data ........ first ........', search_data);
@@ -118,12 +105,12 @@ var PosDashboard = AbstractAction.extend({
                 method: "get_information",
                 args : [state, search_data],
             });
-          console.log('search data ........ 222 ........', search_data);
       }
       def2.then(function (res) {
           self.payment_details = res['customer_data'];
           self.top_salesperson = res['cash_data'];
           self.selling_product = res['vendor_data'];
+          self.amount_total = res['amount_total']
 
           if (la_data["start_date"] !== "") {
               self.default_start_date = la_data["start_date"];

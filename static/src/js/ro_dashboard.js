@@ -45,6 +45,9 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
             this.entree_autre = [];
             this.default_start_date = "";
             this.default_end_date = "";
+            this.customer_data = [];
+            this.vendor_data = [];
+            this.cash_data = [];
         },
 
         // La 1ere fonction exécutée
@@ -124,15 +127,15 @@ odoo.define("dashboard_ro.Dashboard", function (require) {
             // Si une période n'est pas choisie, on fait un affichage apr défaut
             if (la_data["start_date"] === "") {
                 var def1 = this._rpc({
-                    model: "repair.order",
-                    method: "get_repair_order_details",
+                    model: "mini.account.dashboard",
+                    method: "get_information",
                 });
             }
             // sion, on tien compte de la valeur de la_data et on la passe en paramètre de get_repair_order_details
             else {
                 var def1 = this._rpc({
-                    model: "repair.order",
-                    method: "get_repair_order_details",
+                    model: "mini.account.dashboard",
+                    method: "get_information",
                     args: [la_data],
                 });
             }

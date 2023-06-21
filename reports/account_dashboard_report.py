@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 class AccountDashboardReport(models.AbstractModel):
-    _name = 'report.dashboard_account.account_dashboard_report'
+    _name = 'report.account_dashboard.account_dashboard_report'
 
     @api.model
     def _get_report_values(self, docids, data=None):

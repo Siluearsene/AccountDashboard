@@ -104,6 +104,7 @@ var PosDashboard = AbstractAction.extend({
 
       if (la_data["start_date"] === "") {
           search_data['is_search'] = false;
+          console.log('search data ........ first ........')
           var def2 = self._rpc({
                 model: "mini.account.dashboard",
                 method: "get_information",

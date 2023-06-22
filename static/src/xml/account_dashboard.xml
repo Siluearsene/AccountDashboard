@@ -183,7 +183,7 @@
                     <div class="general-layout">
                         <div class="icon-layout">
                             <div class="col-3">
-                                <i class="fa fa-money icon-custom"/>
+                                <i class="fa fa-info icon-custom"/>
                             </div>
                             <div class="col-6 title-custom">
                                 VALEUR STOCK AU PRIX DE REVIENT
@@ -202,7 +202,7 @@
                     <div class="general-layout">
                         <div class="icon-layout">
                              <div class="col-3">
-                                <i class="fa fa-money icon-custom"/>
+                                <i class="fa fa-info icon-custom"/>
                             </div>
                             <div class="col-6 title-custom">
                                 SITUATION NETTE

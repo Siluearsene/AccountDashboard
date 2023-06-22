@@ -18,7 +18,7 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'account_dashboard/static/src/js/pos_dashboard.js',
+            'account_dashboard/static/src/js/account_dashboard.js',
             'account_dashboard/static/src/xml/account_dashboard.xml',
             'account_dashboard/static/src/css/ro_dashboard.css',
             'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js',

@@ -82,9 +82,6 @@ class MiniAccountDashboard(models.Model):
                 rec3.update({'amount': '{:,}'.format(int(rec3['amount'])).replace(',', ' ')})
             for rec in cash_data:
                 rec.update({'amount': '{:,}'.format(int(rec['amount'])).replace(',', ' ')})
-
-            print('.................................state data', cash_data)
-            print('.................................state data', customer_data)
         return dict(cash_data=cash_data, customer_data=customer_data, vendor_data=vendor_data,
                     amount_total=amount_total, stock_value=stock_value)
 

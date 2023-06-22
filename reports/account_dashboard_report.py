@@ -36,6 +36,14 @@ class AccountDashboardReport(models.AbstractModel):
             ('partner_type', '=', 'supplier'),
             ('state', '=', 'posted'),
         ])
+        account_payment_supplier_antidate = self.env['account.payment'].search([
+            ('date', '>=', account_data['start_date']),
+            ('date', '<=', account_data['end_date']),
+            ('payment_type', '=', 'outbound'),
+            ('partner_type', '=', 'supplier'),
+            ('check_antidate','=',True)
+        ])
+        account_payment_supplier_antidates = sum(account_payment_supplier_antidate.mapped('amount'))
         print("account_payment_supplier", account_payment_supplier)
         debit_supplier = sum(account_move_supplier.mapped('amount_total'))
         print('=========debit_supplier', debit_supplier)
@@ -59,14 +67,27 @@ class AccountDashboardReport(models.AbstractModel):
             ('partner_type', '=', 'customer'),
             ('state', '=', 'posted'),
         ])
+        account_payment_customer_antidate = self.env['account.payment'].search([
+            ('date', '>=', account_data['start_date']),
+            ('date', '<=', account_data['end_date']),
+            ('payment_type', '=', 'inbound'),
+            ('partner_type', '=', 'customer'),
+            ('check_antidate','=', True),
+        ])
+        print('====account_payment_customer_antidate.mapped()======',account_payment_customer_antidate.mapped('amount'))
+        account_payment_customer_antidates = sum(account_payment_customer_antidate.mapped('amount'))
+
+
         debit_customer = sum(account_move_customer.mapped('amount_total'))
         credit_customer = sum(account_payment_customer.mapped('amount'))
         amount_customer = - debit_customer + credit_customer
+       
+        
  
         amount_total_tresorerie = sum(record['amount'] for record in account_data.mini_cash_dashboard_ids.read())
         stock_amount = self.env['mini.account.dashboard'].get_stock_amount_qty()
         
-        total_situation_nette = amount_total_tresorerie + amount_customer -(amount_supplier) + stock_amount
+        total_situation_nette = amount_total_tresorerie + amount_customer -(amount_supplier) + stock_amount + account_payment_customer_antidates + account_payment_supplier_antidates
 
         return {
             'docs': account_data,
@@ -78,5 +99,7 @@ class AccountDashboardReport(models.AbstractModel):
             'amount_customer': amount_customer,
             'amount_total_tresorerie':amount_total_tresorerie,
             'stock_amount':stock_amount,
-            'total_situation_nette': total_situation_nette
+            'total_situation_nette': total_situation_nette,
+            'account_payment_supplier_antidates':account_payment_supplier_antidates,
+            'account_payment_customer_antidates': account_payment_customer_antidates
         }

@@ -7,7 +7,7 @@
     'category': 'Dashboard',
     'author': 'Emmanuel Seri Koubi',
     'website': "https://www.progistack.com",
-    'depends': ['account_accountant'],
+    'depends': ['account_accountant','account_optimization'],
     'data': [
         'security/ir.model.access.csv',
         'views/mini_account_dashbord_view.xml',

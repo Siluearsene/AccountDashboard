@@ -90,7 +90,6 @@ var PosDashboard = AbstractAction.extend({
         var search_data = {'is_search': false, 'start_date': la_data["start_date"], 'end_date': la_data["end_date"]};
 
       if (la_data["start_date"] === "") {
-          console.log('search data ........ first ........', search_data);
           var def2 = self._rpc({
                 model: "mini.account.dashboard",
                 method: "get_information",
@@ -171,7 +170,6 @@ var PosDashboard = AbstractAction.extend({
         // self.start();
         window.unload = function () {
             self.set_cookie("", "");
-            console.log("Unload ici");
             self.set_used_date(1);
             return "yo";
         };

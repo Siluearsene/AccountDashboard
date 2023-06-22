@@ -75,7 +75,16 @@ class MiniAccountDashboard(models.Model):
         amount_total = sum(rec['amount'] for rec in cash_data) + sum(rec['amount'] for rec in customer_data) - sum(
             rec['amount'] for rec in vendor_data) + self.get_stock_amount_qty()
         amount_total = '{:,}'.format(int(amount_total)).replace(',', ' ')
-        stock_value = self.get_stock_amount_qty()
+        stock_value = '{:,}'.format(int(self.get_stock_amount_qty())).replace(',', ' ')
+        if state:
+            for rec1, rec3 in zip(customer_data, vendor_data):
+                rec1.update({'amount': '{:,}'.format(int(rec1['amount'])).replace(',', ' ')})
+                rec3.update({'amount': '{:,}'.format(int(rec3['amount'])).replace(',', ' ')})
+            for rec in cash_data:
+                rec.update({'amount': '{:,}'.format(int(rec['amount'])).replace(',', ' ')})
+
+            print('.................................state data', cash_data)
+            print('.................................state data', customer_data)
         return dict(cash_data=cash_data, customer_data=customer_data, vendor_data=vendor_data,
                     amount_total=amount_total, stock_value=stock_value)
 

@@ -49,7 +49,7 @@ class AccountDashboardReport(models.AbstractModel):
         print('=========debit_supplier', debit_supplier)
         credit_supplier = sum(account_payment_supplier.mapped('amount'))
         print("=========credit supplier", credit_supplier)
-        amount_supplier = debit_supplier - credit_supplier
+        amount_supplier = credit_supplier - debit_supplier
         print('===amount supplier', amount_supplier)
         # recherche
         # pour afficher le solde client
@@ -80,7 +80,7 @@ class AccountDashboardReport(models.AbstractModel):
 
         debit_customer = sum(account_move_customer.mapped('amount_total'))
         credit_customer = sum(account_payment_customer.mapped('amount'))
-        amount_customer = - debit_customer + credit_customer
+        amount_customer =  debit_customer - credit_customer 
        
         
  

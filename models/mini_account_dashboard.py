@@ -41,10 +41,10 @@ class MiniAccountDashboard(models.Model):
 
     @api.model
     def get_information(self, state, search_data):
-        companies = self.env['res.company'].sudo().search([])
-        company = None
+        # companies = self.env['res.company'].sudo().search([])
+        company = tuple(self.env.context.get('allowed_company_ids', []))
+        print('active company ids ........', self.env.context.get('allowed_company_ids', []))
         data = dict()
-        print('search data ...............', search_data)
         if search_data['is_search']:
             data = {
                 'start_date': search_data['start_date'],
@@ -55,10 +55,10 @@ class MiniAccountDashboard(models.Model):
                 'start_date': datetime(fields.Datetime.now().year, 1, 1).strftime("%Y-%m-%d"),
                 'end_date': datetime(fields.Datetime.now().year, 12, 1).strftime("%Y-%m-%d")
             }
-        if state:
-            company = tuple(companies.ids)
-        else:
-            company = tuple(companies.filtered(lambda c: c.entrepot_centrale).ids)
+        # if state:
+        #     company = tuple(companies.ids)
+        # else:
+        #     company = tuple(companies.filtered(lambda c: c.entrepot_centrale).ids)
         # info tresorerie
         query = '''select account_move.journal_id as journal_id,account_journal.backend_name as name, 
         sum(account_bank_statement_line.amount) as amount from account_move inner join account_bank_statement_line on 
@@ -86,7 +86,6 @@ class MiniAccountDashboard(models.Model):
                     amount_total=amount_total, stock_value=stock_value)
 
     def get_customer_data(self, data):
-        now_date = datetime.now()
         account_move = self.env['account.move'].search([
             ('invoice_date', '>=', data['start_date']),
             ('invoice_date', '<=', data['end_date']),
@@ -103,19 +102,15 @@ class MiniAccountDashboard(models.Model):
         ])
         debit = 0
         credit = 0
-        journal_id = None
         if account_move:
             debit = sum(account_move.mapped('amount_total'))
-            journal_id = account_move.journal_id.id
         if account_payment:
             credit = sum(account_payment.mapped('amount'))
         customer_data = [
-            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': debit - credit,
-             'journal_id': journal_id}]
+            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': debit - credit}]
         return customer_data
 
     def get_vendor_data(self, data):
-        now_date = datetime.now()
         account_move = self.env['account.move'].search([
             ('invoice_date', '>=', data['start_date']),
             ('invoice_date', '<=', data['end_date']),
@@ -132,15 +127,13 @@ class MiniAccountDashboard(models.Model):
         ])
         debit = 0
         credit = 0
-        journal_id = None
         if account_move:
             debit = sum(account_move.mapped('amount_total'))
-            journal_id = account_move.journal_id.id
+            # journal_id = account_move.journal_id.id
         if account_payment:
             credit = sum(account_payment.mapped('amount'))
         vendor_data = [
-            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': - debit + credit,
-             'journal_id': journal_id}]
+            {'start_date': data['start_date'], 'end_date': data['end_date'], 'amount': - debit + credit}]
         return vendor_data
 
     # avoir la montant du stock avec le prix de revient

@@ -66,6 +66,16 @@
 
                                         </t>
                                     </tbody>
+                                    <tbody>
+                                        <tr style="border-top: none; border-bottom: none;">
+                                            <td style="padding: 10px;border: none;text-align: left; font-size: 14px">
+                                                <span/>
+                                            </td>
+                                            <td style="padding: 10px;border: none;text-align: right; background-color: #f2f2f2;font-size: 14px">
+                                                <span t-esc="'{:,}'.format(int(amount_total_tresorerie)).replace(',', ' ')"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                                 <table class="table table-sm mt48">
                                     <thead style="border: 1px solid black">
@@ -82,8 +92,8 @@
                                             <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
                                                 Valeur du Stock
                                             </td>
-                                            <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                <strong>1,145,355,201</strong>
+                                            <td style="padding: 10px;text-align: right;border: none; ; background-color: #f2f2f2; font-size: 14px">
+                                                <strong><span t-esc="'{:,}'.format(int(stock_amount)).replace(',', ' ')"/></strong>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -104,7 +114,7 @@
                                                 TRESORERIE
                                             </td>
                                             <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                20,079,136
+                                                <span t-esc="'{:,}'.format(int(amount_total_tresorerie)).replace(',', ' ')"/>
                                             </td>
                                         </tr>
                                         <tr style="border-top: none; border-bottom: none;">
@@ -112,7 +122,7 @@
                                                 SOLDE CLIENTS
                                             </td>
                                             <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                689,103,753
+                                                <span t-esc="'{:,}'.format(int(amount_customer)).replace(',', ' ')"></span>
                                             </td>
                                         </tr>
                                         <tr style="border-top: none; border-bottom: none;">
@@ -128,7 +138,7 @@
                                                 SOLDE FOURNISSEURS
                                             </td>
                                             <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                -1,752,677,791
+                                                <span t-esc="amount_supplier"/>
                                             </td>
                                         </tr>
                                         <tr style="border-top: none; border-bottom: none;">
@@ -144,15 +154,17 @@
                                                 VALEUR STOCK
                                             </td>
                                             <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                1,145,355,201
+                                                <span t-esc="'{:,}'.format(int(stock_amount)).replace(',', ' ')"/>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td style="padding: 10px;border-right: none;text-align: left; font-size: 14px"></td>
-                                            <td style="padding: 10px;text-align: right;width: 100%;border-left:none; font-size: 14px">
-                                                <strong>101,860,299</strong>
-                                            </td>
-                                        </tr>
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 10px;border-right: none;text-align: left; font-size: 14px"></td>
+                                                <td style="padding: 10px;text-align: right;width: 100%;border-left:none; background-color: #f2f2f2 ;font-size: 14px">
+                                                    <strong> <span t-esc="'{:,}'.format(int(total_situation_nette)).replace(',', ' ')"/></strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                     </tbody>
                                 </table>
                                 <div></div>
@@ -171,23 +183,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <t t-foreach="customer_data" t-as="customer">
-                                            <tr style="border-top: none; border-bottom: none;">
-                                                <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
-                                                    <span t-esc="customer['start_date']"/> au  <span t-esc="customer['end_date']"/>
-                                                </td>
-                                                <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
-                                                    <span t-esc="'{:,}'.format(int(customer['amount'])).replace(',', ' ')"/>
-                                                </td>
-                                            </tr>
-                                        </t>
+                                            <t t-foreach="customer_data" t-as="customer">
+                                                <tr style="border-top: none; border-bottom: none;">
+                                                    <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
+                                                        <span t-esc="customer['start_date']"/> au  <span t-esc="customer['end_date']"/>
+                                                    </td>
+                                                    <td style="padding: 10px;text-align: right;border: none; font-size: 14px">
+                                                        <span t-esc="'{:,}'.format(int(customer['amount'])).replace(',', ' ')"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
 
                                             <tr style="border-top: none; border-bottom: none;">
                                                 <td style="padding: 10px;text-align: left;border: none; font-size: 14px">
                                                     Solde au <span t-esc="date_day"/>
                                                 </td>
                                                 <td style="padding: 10px;text-align: right;border: none; background-color: #f2f2f2; font-size: 14px">
-                                                    <strong>689,103,753</strong>
+                                                    <strong><span t-esc= "'{:,}'.format(int(amount_customer)).replace(',', ' ')"/></strong>
                                                 </td>
                                             </tr>
                                             <tr style="border-top: none;">
@@ -235,7 +247,7 @@
                                                     Solde au <span t-esc="date_day"/>
                                                 </td>
                                                 <td style="padding: 10px;text-align: right;border: none; background-color: #f2f2f2; font-size: 14px">
-                                                    <strong>1,752,677,791</strong>
+                                                    <strong><span t-esc="'{:,}'.format(int(amount_supplier)).replace(',', ' ')"></span></strong>
                                                 </td>
                                             </tr>
                                             <tr style="border-top: none;">

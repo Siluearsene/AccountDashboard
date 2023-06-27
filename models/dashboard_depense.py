@@ -32,6 +32,8 @@ class DepenseDashboard(models.Model):
         check_company=True,
         compute='_compute_currency_id', store=True,
     )
+    company_id = fields.Many2one('res.company', string='Entrepise', readonly=True,
+        default=lambda self: self.env.company)
     amount = fields.Monetary(string="Montant")
     solde = fields.Monetary(string="Solde")
 

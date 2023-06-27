@@ -6,7 +6,7 @@ class DepenseDashboard(models.Model):
     _order='create_date DESC'
     _check_company_auto = True
 
-    date = fields.Date(string="date transaction")
+    date = fields.Date(string="Date transaction")
     type_transaction = fields.Selection(
         [('in', 'Entrée'), ('out', 'Sortie')],
         string='Type de transaction',
@@ -20,7 +20,7 @@ class DepenseDashboard(models.Model):
         compute='_compute_journal_id', store=True,
         check_company=True,
     )
-    payment_ref = fields.Char(string='intitulé de depense')
+    payment_ref = fields.Char(string='Intitulé de depense')
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Partenaire', ondelete='restrict',
@@ -32,8 +32,8 @@ class DepenseDashboard(models.Model):
         check_company=True,
         compute='_compute_currency_id', store=True,
     )
-    amount = fields.Monetary(string="montant")
-    solde = fields.Monetary(string="solde")
+    amount = fields.Monetary(string="Montant")
+    solde = fields.Monetary(string="Solde")
 
     
 

@@ -90,8 +90,7 @@ action = env['mini.account.dashboard']._action_open_dashboard_view()
                   id="root_mini_dashboard_menu_reports"
                   parent="root_mini_dashboard_menu"
                   action="ir_actions_server_mini_account_dashboard_view"
-                  sequence="2"
+                  sequence="3"
         />
-
     </data>
 </odoo>

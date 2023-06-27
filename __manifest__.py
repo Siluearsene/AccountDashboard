@@ -11,6 +11,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/mini_account_dashbord_view.xml',
+        'views/dashboard_depense.xml',
         'views/views.xml',
         'views/dashboard_views.xml',
         'reports/account_dashboard_report.xml',

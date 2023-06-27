@@ -1,5 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_mini_account_dashboard,mini.account.dashboard,model_mini_account_dashboard,,1,1,1,1
+access_depense_dashboard,depense.dashboard,model_depense_dashboard,,1,1,1,1
 access_mini_cash_dashboard,mini.cash.dashboard,model_mini_cash_dashboard,,1,1,1,1
 access_mini_customer_dashboard,mini.customer.dashboard,model_mini_customer_dashboard,,1,1,1,1
 access_mini_vendor_dashboard,mini.vendor.dashboard,model_mini_vendor_dashboard,,1,1,1,1

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Repair Order Dashboard Pagani",
+    'name': "account dashboard",
     'version': '16.0.1.0.2',
-    'summary': """RO Dashboard""",
-    'description': """Repair Order Dashboard""",
+    'summary': """Dashboard""",
+    'description': """Account Dashboard""",
     'category': 'Dashboard',
-    'author': 'Emmanuel Seri Koubi',
+    'author': 'progistack',
     'website': "https://www.progistack.com",
     'depends': ['account_accountant','account_optimization'],
     'data': [
